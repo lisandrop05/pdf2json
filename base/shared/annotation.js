@@ -330,9 +330,9 @@ var WidgetAnnotation = (function WidgetAnnotationClosure() {
     var rawValue = Util.getInheritableProperty(dict, 'V') || '';
     var value = (rawValue.name ? rawValue.name : rawValue) || '';
     data.fieldValue = stringToPDFString(value);
-             
+
     data.alternativeText = stringToPDFString(dict.get('TU') || '');
-    
+
     data.alternativeID = stringToPDFString(dict.get('TM') || '');
 
     data.defaultAppearance = Util.getInheritableProperty(dict, 'DA') || '';
@@ -377,7 +377,9 @@ var WidgetAnnotation = (function WidgetAnnotationClosure() {
 //END:MQZ. Sep.19.2012. comment out the fullname routin, replace it with getInheritableProperty('T') //PDF Spec P.689
 //It matches a sequence of at least one period or space, which is then replaced by a single underscore
       var itemNameStr = stringToPDFString(Util.getInheritableProperty(dict, 'T') || '');
-      itemNameStr = itemNameStr.replace(/[.\s\W]+/g, '_'); //replace spaces and non-word character (not [^a-zA-Z0-9_]) with _
+
+      // I commented out the following line to allow the field name to be used later to acurately match the field name
+      // itemNameStr = itemNameStr.replace(/[.\s\W]+/g, '_'); //replace spaces and non-word character (not [^a-zA-Z0-9_]) with _
       data.fullName = itemNameStr.replace(/^[\s_,:.;\/\\]+/, ''); //replace starting punctuation
 
       PDFAnno.processAnnotation(dict, data);
